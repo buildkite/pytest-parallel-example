@@ -1,0 +1,8 @@
+steps:
+  - label: ":pytest:"
+    parallelism: 20
+    image: astral/uv:debian
+    command: |
+      uv run pytest \
+        --splits "$${BUILDKITE_PARALLEL_JOB_COUNT}" --group "$$(($${BUILDKITE_PARALLEL_JOB} + 1))" \
+        --retries 2
